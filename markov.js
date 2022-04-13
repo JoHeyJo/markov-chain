@@ -1,3 +1,5 @@
+"use strict"
+
 /** Textual markov chain generator. */
 
 
@@ -15,7 +17,7 @@ class MarkovMachine {
   /** Get markov chain: returns Map of Markov chains.
    *
    *  For text of "The cat in the hat.", chains will be:
-   * 
+   *
    *  {
    *   "The": ["cat"],
    *   "cat": ["in"],
@@ -23,10 +25,10 @@ class MarkovMachine {
    *   "the": ["hat."],
    *   "hat.": [null]
    *  }
-   * 
+   *
    * */
 
-  getChains() { 
+  getChains() {
     const chain = {};
 
     for(let i = 0; i < this.words.length; i++){
@@ -35,7 +37,7 @@ class MarkovMachine {
       if(chain[firstWord]){
         chain[firstWord].push(secondWord || null)
       } else {
-        chain[firstWord] = [secondWord];
+        chain[firstWord] = [secondWord || null];
       }
     }
 
@@ -50,7 +52,7 @@ class MarkovMachine {
     let currentWord = this.words[0];
     let randomText = [currentWord];
     // TODO: implement this
-   
+
     while(currentWord){
       const randIndex = Math.floor(Math.random() * (this.chains[currentWord].length));
       let secondWord = this.chains[currentWord][randIndex];
@@ -61,4 +63,6 @@ class MarkovMachine {
   }
 }
 
- //write test that has one word in array 
+ //write test that has one word in array
+
+ module.exports = MarkovMachine
